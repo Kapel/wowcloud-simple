@@ -1,0 +1,48 @@
+---
+- name: Get github releases
+  uri:
+    url: https://api.github.com/repos/docker/compose/releases/latest
+    return_content: true
+  register: _docker_compose_github_releases
+  check_mode: false
+  
+- name: Get latest version
+  set_fact:
+    _docker_compose_latest_version: "{{ _docker_compose_github_releases.json.tag_name }}"
+    _docker_compose_download_url: "{{ _docker_compose_github_releases.json.assets | map(attribute='browser_download_url') | select('match', '.*Linux-x86_64.*') | first }}"
+
+- name: Check latest version
+  debug:
+    msg: |
+      docker_compose version to be installed is {{ docker_compose_version }}.
+      The latest docker_compose version is {{ _docker_compose_latest_version }}.
+
+      To upgrade set docker_compose_version variable and use "-e docker_compose_upgrade=true"
+  changed_when: docker_compose_version | string != _docker_compose_latest_version | string
+
+- name: Check if docker-compose is installed
+  stat:
+    path: /usr/local/bin/docker-compose
+  register: _docker_compose_binary
+
+- name: Print docker_compose_latest_version
+  debug: 
+    msg: System {{ _docker_compose_latest_version }} 
+  when: _docker_compose_latest_version is defined
+
+- name: Print docker_compose_download_url
+  debug: 
+    msg: System {{ _docker_compose_download_url }} 
+  when: _docker_compose_download_url is defined
+
+- name: Download and install docker-compose
+  get_url:
+    url: "{{ _docker_compose_download_url }}"
+    dest: /usr/local/bin/docker-compose
+  when: _docker_compose_binary is defined
+
+- name: Set chmod +x on docker-compose
+  file: 
+    dest: /usr/local/bin/docker-compose
+    mode: a+x
+  when: _docker_compose_binary is defined

@@ -1,0 +1,35 @@
+---
+#clone repo
+- name: Clone azerothcore repo
+  git:
+    repo: "{{ azerothcore_repo }}" 
+    dest: /home/{{ jenkins_user }}/azerothcore
+    version: "{{ azerothcore_version }}"
+
+- name: Check if the repo exists
+  stat:
+    path: "/home/{{ jenkins_user }}/azerothcore"
+  register: stat_somsiadrepo
+
+- name: Download assets
+  get_url:
+    path: '{{ azerothcore_assets }}'
+    dest: "/home/{{ jenkins_user }}/azerothcore/assets.zip"
+  when: stat_somsiadrepo.stat.exists == true
+
+- name: Unzip assets
+  unarchive:
+    src: "/home/{{ jenkins_user }}/azerothcore/assets.zip"
+    dest: "/home/{{ jenkins_user }}/azerothcore/azerothcore/docker/worldserver/data/"
+    remote_src: yes
+    keep_newer: yes
+  when: stat_somsiadrepo.stat.exists == true
+
+- name: Generate server config
+  command: ./home/{{ jenkins_user }}/azerothcore/azerothcore/bin/acore-docker-generate-etc
+
+- name: Compile azerothcore
+  command: ./home/{{ jenkins_user }}/azerothcore/azerothcore/bin/acore-docker-build
+
+
+...

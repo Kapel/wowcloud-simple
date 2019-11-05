@@ -1,0 +1,13 @@
+---
+
+- name: Setup azerothcore
+  include_tasks: setup.yml
+
+
+
+
+#azerothcore up (handler)
+#create users from vault
+#update realmlist (handler?)
+#restart azerothcore
+...

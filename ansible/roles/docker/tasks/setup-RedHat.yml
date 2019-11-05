@@ -1,0 +1,50 @@
+---
+- name: Install required packages
+  yum:
+    name:
+    - ca-certificates
+    - yum-utils
+    - device-mapper-persistent-data
+    - lvm2
+    - epel-release
+
+#   need to fix
+#-  name: Reload ca-certs
+#   command: /bin/true
+#   notify: reload ca-certificates
+
+- name: Install python-pip
+  yum:
+    name: "{{ packages }}"
+    update_only: yes
+  vars:
+    packages:
+    - python-pip
+
+- name: Add docker repository 
+  yum_repository:
+    name: docker
+    description: docker-ce repository
+    baseurl: https://download.docker.com/linux/centos/7/$basearch/stable
+    gpgcheck: yes
+    gpgkey: https://download.docker.com/linux/centos/gpg
+    
+- name: Enable repo and install container-selinux
+  yum:
+    name: container-selinux
+    enablerepo: rhui-REGION-rhel-server-extras
+    state: present
+  when: ansible_distribution == 'Red Hat Enterprise Linux'
+
+- name: Install docker
+  yum:
+    name: 
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+  notify: "start-enable-docker"
+
+- name: Install docker Compose
+  include_tasks: setup-docker-compose.yml
+
+

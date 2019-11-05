@@ -1,0 +1,20 @@
+
+- name: start-enable-docker
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
+    daemon-reload: yes
+
+- name: restart docker
+  systemd: 
+    name: docker
+    state: restarted
+    
+- name: reload ca-certificates
+  shell: /usr/sbin/update-ca-certificates
+  when: ansible_os_family == "Debian"
+
+- name: reload ca-certificates
+  shell: /bin/update-ca-trust
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'

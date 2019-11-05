@@ -1,0 +1,25 @@
+---
+
+- name: Start azerothcore
+  docker_compose:
+    project_src: "/home/{{ jenkins_user }}/azerothcore/azerothcore/"
+    build: no
+
+- name: Restart azerothcore
+  docker_compose:
+    project_src: "/home/{{ jenkins_user }}/azerothcore/azerothcore/"
+    build: no
+    restarted: yes
+
+- name: Stop azerothcore
+  docker_compose:
+    project_src: "/home/{{ jenkins_user }}/azerothcore/azerothcore/"
+    build: no
+    stopped: yes
+
+#- name: Update realmlist
+#- name: Create users
+
+  
+    
+...

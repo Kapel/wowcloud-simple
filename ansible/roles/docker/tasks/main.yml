@@ -1,0 +1,15 @@
+---
+- include_tasks: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat' or ansible_os_family == 'CentOS'
+
+- include_tasks: setup-Debian.yml
+  when: ansible_os_family == 'Debian' or ansible_os_family == 'Ubuntu'
+
+#FYI: https://serverfault.com/questions/542910/adding-a-user-to-an-additional-group-using-ansible#comment1100028_799502
+- name: Add user to docker group
+  user: 
+    name: "{{ item }}"
+    groups: docker
+    append: yes
+  with_items: "{{ docker_users }}"
+  #check if user exists

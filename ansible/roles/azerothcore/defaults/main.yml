@@ -1,0 +1,5 @@
+---
+somsiadcore_repo: 'https://github.com/azerothcore/azerothcore-wotlk.git'
+somsiadcore_version: master
+somsiadcore_assets: 'https://github.com/wowgaming/client-data/releases/download/v7/data.zip'
+...
