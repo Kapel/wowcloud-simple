@@ -13,7 +13,7 @@ resource "aws_security_group" "WOWCLOUD-SIMPLE-SG" {
     from_port = "${var.SSH}"
     to_port = "${var.SSH}"
     protocol = "tcp"
-    cidr_blocks = ["${aws_subnet.WOWCLOUD-BASTION.cidr_block}"]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
