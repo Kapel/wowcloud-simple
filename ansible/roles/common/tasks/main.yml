@@ -18,15 +18,16 @@
 
 - name: Add your packages
   apt:
-    name: "{{ item }}"
     state: latest
-  with_items:
-    - git
-    - tmux
-    - screen
-    - wget
-    - curl
-    - vim
-    - htop
-    - net-tools
-    - unzip
+    update_cache: "yes"
+    pkg:
+      - git
+      - tmux
+      - screen
+      - wget
+      - curl
+      - vim
+      - htop
+      - net-tools
+      - unzip
+      - python-apt

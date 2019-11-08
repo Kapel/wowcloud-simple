@@ -6,26 +6,29 @@
 
 - name: Install python-pip
   apt:
-    name: "{{ packages }}"
-    update_only: yes
-  vars:
-    packages:
-    - python-pip
+    state: latest
+    update_cache: "yes"
+    pkg:
+      - python-pip
+
+- name: Add Docker GPG apt Key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
 
 - name: Add docker repository 
   apt_repository:
     filename: docker
-    description: docker-ce repository
     repo: '{{ docker_repo }}'
-    gpgcheck: yes
-    gpgkey: https://download.docker.com/linux/centos/gpg
+    state: present
     
 - name: Install docker
   apt:
-    name: 
+    pkg: 
     - docker-ce
     - docker-ce-cli
     - containerd.io
+    update_cache: "yes"
   notify: "start-enable-docker"
 
 - name: Install docker Compose
