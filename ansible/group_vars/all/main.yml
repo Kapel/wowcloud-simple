@@ -1,7 +1,4 @@
 ---
 system_users: [wowcloud]
 jenkins_user: wowcloud
-users:
-  - username: wowcloud
-    key: '{{ wowcloud_privkey }}'
 ...

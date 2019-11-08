@@ -9,7 +9,7 @@ resource "aws_instance" "wowcloud-simple" {
   instance_type = "t3.medium"
   vpc_security_group_ids = ["${aws_security_group.WOWCLOUD-SIMPLE-SG.id}"]
   subnet_id = "${aws_subnet.WOWCLOUD-EC2.id}"
-  key_name = "Kapel"
+  key_name = "wowcloud-key"
 
   associate_public_ip_address = true
 

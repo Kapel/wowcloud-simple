@@ -1,4 +1,4 @@
 ---
-docker_users: [ubuntu, {{ jenkins_user }}, {{ system_users }}]
+docker_users: [ubuntu, "{{ jenkins_user }}", "{{ system_users }}"]
 docker_repo: 'deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable'
 docker_compose_version: 1.24.1
