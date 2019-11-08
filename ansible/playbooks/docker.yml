@@ -1,5 +1,6 @@
 ---                                                                     
-- become: true
+- hosts: all
+  become: true
 
   roles:
   - { role: common, tags: [ 'provisioning' ] }
