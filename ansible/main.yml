@@ -1,0 +1,29 @@
+---
+- hosts: all
+  become: true
+  gather_facts: true
+
+  pre_tasks:
+  - name: Install python for Ansible
+    raw: bash -c "test -e /usr/bin/python || (yum -y update && yum -y install python)"
+    register: output
+    changed_when: output.stdout != ""
+    become: true
+    tags:
+        - always
+    when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+    
+  - name: Install python for Ansible
+    raw: bash -c "test -e /usr/bin/python || (apy -y update && apt -y install python)"
+    register: output
+    changed_when: output.stdout != ""
+    become: true
+    tags:
+        - always
+    when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
+#  - name: Gathering Facts
+#    setup:
+#    tags:
+#        - always
+
+- import_playbook: "playbooks/{{ env }}.yml"
