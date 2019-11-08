@@ -1,7 +1,7 @@
 ---
-system_users: [somsiadcore]
-jenkins_user: somsiadcore
+system_users: [wowcloud]
+jenkins_user: wowcloud
 users:
-  - username: somsiadcore
-    key: '{{ somsiadcore_privkey }}'
+  - username: wowcloud
+    key: '{{ wowcloud_privkey }}'
 ...
