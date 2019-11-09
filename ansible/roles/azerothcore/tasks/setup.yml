@@ -1,11 +1,8 @@
 ---
-#clone repo
-
 - name: Check if the repo exists
   stat:
     path: "/home/{{ wowcloud_user }}/wowcloud"
   register: stat_wowcloudrepo
-
 
 - name: Clone wowcloud repo
   git:
@@ -51,6 +48,5 @@
   command: "sh /home/{{ wowcloud_user }}/wowcloud/bin/acore-docker-build"
   args:
     chdir: /home/{{ wowcloud_user }}/wowcloud
-
 
 ...

@@ -3,12 +3,27 @@
 - name: Setup azerothcore
   include_tasks: setup.yml
 
+- name: Start wowcloud
+  shell: "docker-compose up -d"
+  args:
+    chdir: /home/{{ wowcloud_user }}/wowcloud
+  tags: start-wowcloud
 
-- name: WoWcloud up
-  debug: 
-    msg: "Dummy task for starting WoWCloud"
-  notify: "Start wowcloud"
+- name: Restart wowcloud
+  shell: "docker-compose restart"
+  args:
+    chdir: /home/{{ wowcloud_user }}/wowcloud
+  tags: restart-wowcloud
+  when:
+    - '"restart-wowcloud" in ansible_run_tags'
 
+- name: Stop wowcloud
+  shell: "docker-compose stop"
+  args:
+    chdir: /home/{{ wowcloud_user }}/wowcloud
+  tags: stop-wowcloud
+  when:
+    - '"stop-wowcloud" in ansible_run_tags'
 
 #azerothcore up (handler)
 #create users from vault
