@@ -4,6 +4,10 @@
   include_tasks: setup.yml
 
 
+- name: WoWcloud up
+  debug: 
+    msg: "Dummy task for starting WoWCloud"
+  notify: "Start wowcloud"
 
 
 #azerothcore up (handler)

@@ -2,5 +2,5 @@
 wowcloud_repo: 'https://github.com/azerothcore/azerothcore-wotlk.git'
 wowcloud_version: master
 wowcloud_assets: 'https://github.com/wowgaming/client-data/releases/download/v7/data.zip'
-wowcloud_user: wowcloud
+wowcloud_user: wowcloud-simple
 ...

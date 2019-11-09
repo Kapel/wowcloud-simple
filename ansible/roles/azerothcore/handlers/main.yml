@@ -1,23 +1,42 @@
 ---
+#
+#- name: Start wowcloud
+#  docker_compose:
+#    project_src: "/home/{{ wowcloud_user }}/wowcloud/"
+#    build: no
+#
+#- name: Restart wowcloud
+#  docker_compose:
+#    project_src: "/home/{{ wowcloud_user }}/wowcloud/"
+#    build: no
+#    restarted: yes
+#
+#- name: Stop wowcloud
+#  docker_compose:
+#    project_src: "/home/{{ wowcloud_user }}/wowcloud/"
+#    build: no
+#    stopped: yes
+#
+- name: Start wowcloud
+  command: "docker-compose up -d"
+  args:
+    chdir: /home/{{ wowcloud_user }}/wowcloud
+  tags: start-wowcloud
 
-- name: Start azerothcore
-  docker_compose:
-    project_src: "/home/{{ jenkins_user }}/azerothcore/azerothcore/"
-    build: no
+- name: Restart wowcloud
+  command: "docker-compose restart"
+  args:
+    chdir: /home/{{ wowcloud_user }}/wowcloud
+  tags: restart-wowcloud
 
-- name: Restart azerothcore
-  docker_compose:
-    project_src: "/home/{{ jenkins_user }}/azerothcore/azerothcore/"
-    build: no
-    restarted: yes
+- name: Stop wowcloud
+  command: "docker-compose stop"
+  args:
+    chdir: /home/{{ wowcloud_user }}/wowcloud
+  tags: stop-wowcloud
 
-- name: Stop azerothcore
-  docker_compose:
-    project_src: "/home/{{ jenkins_user }}/azerothcore/azerothcore/"
-    build: no
-    stopped: yes
 
-#- name: Update realmlist
+##- name: Update realmlist
 #- name: Create users
 
   
