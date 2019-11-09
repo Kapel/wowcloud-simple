@@ -25,8 +25,13 @@
   when:
     - '"stop-wowcloud" in ansible_run_tags'
 
-#azerothcore up (handler)
-#create users from vault
+#- name: Create user accounts
+#  shell: "docker-compose exec ac-worldserver "
+#  args:
+#     chdir: /home/{{ wowcloud_user }}/wowcloud
+#  with_items:
+#    - {{ players }}
+
 #update realmlist (handler?)
-#restart azerothcore
+
 ...

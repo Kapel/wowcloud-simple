@@ -40,10 +40,19 @@
   when: stat_wowcloudrepo.stat.exists == true
   tags: assets
 
+- name: Check if config exist
+  stat:
+    path: "/home/{{ wowcloud_user }}/wowcloud/docker/authserver/etc/authserver.conf"
+  register: stat_authconf
+  tags: generate-config
+  
+
 - name: Generate server config
   command: "sh /home/{{ wowcloud_user }}/wowcloud/bin/acore-docker-generate-etc"
   args:
     chdir: /home/{{ wowcloud_user }}/wowcloud
+  when: stat_authconf.stat.exists == false OR "generate-config" in ansible_run_tags
+  tags: generate-config
 
 - name: Compile wowcloud
   command: "sh /home/{{ wowcloud_user }}/wowcloud/bin/acore-docker-build"
