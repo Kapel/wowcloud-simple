@@ -20,6 +20,7 @@
   stat:
     path: "/home/{{ wowcloud_user }}/wowcloud/assets.zip"
   register: stat_wowassets
+  tags: assets
 
 - name: Download assets
   get_url:
