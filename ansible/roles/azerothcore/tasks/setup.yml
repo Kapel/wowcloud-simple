@@ -51,7 +51,7 @@
   command: "sh /home/{{ wowcloud_user }}/wowcloud/bin/acore-docker-generate-etc"
   args:
     chdir: /home/{{ wowcloud_user }}/wowcloud
-  when: stat_authconf.stat.exists == false OR "generate-config" in ansible_run_tags
+  when: stat_authconf.stat.exists == false #OR "generate-config" in ansible_run_tags
   tags: generate-config
 
 - name: Compile wowcloud
