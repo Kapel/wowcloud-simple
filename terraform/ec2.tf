@@ -26,7 +26,7 @@ resource "aws_instance" "wowcloud-simple" {
   }
 
     provisioner "local-exec" {
-        command = "sleep 120; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u ubuntu -i '${aws_instance.wowcloud-simple.public_ip},' -e 'env=docker' -e 'wowcloud_realmlist_address=${aws_instance.wowcloud-simple.public_ip}' ../ansible/main.yml"
+        command = "sleep 120; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u ubuntu -i '${aws_instance.wowcloud-simple.public_ip},' -e 'env=docker' -e 'wowcloud_realmlist_address=${aws_instance.wowcloud-simple.public_ip}' main.yml"
         working_dir = "../ansible"
     }
 
