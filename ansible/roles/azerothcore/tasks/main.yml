@@ -32,10 +32,10 @@
 #  with_items:
 #    - {{ players }}
 
-#- name: Update realmlist
-#  shell: "docker-compose exec ac-database mysql -u root -h localhost -p{{ wowcloud_db_password }} acore_auth -e update realmlist set name = "{{ wowcloud_realmlist_name }}", address="{{ wowcloud_realmlist_address }}" where id = {{ wowcloud_realmlist_id }};"
-#  args:
-#     chdir: /home/{{ wowcloud_user }}/wowcloud
-#  tags: update-realmlist
+- name: Update realmlist
+  shell: docker-compose exec ac-database mysql -u root -h localhost -p{{ wowcloud_db_password }} acore_auth -e "update realmlist set name = '{{ wowcloud_realmlist_name }}', address='{{ wowcloud_realmlist_address }}' where id = {{ wowcloud_realmlist_id }};"
+  args:
+     chdir: /home/{{ wowcloud_user }}/wowcloud
+  tags: update-realmlist
 
 ...
