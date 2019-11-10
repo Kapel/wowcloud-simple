@@ -25,6 +25,11 @@ resource "aws_instance" "wowcloud-simple" {
     delete_on_termination = true
   }
 
+    provisioner "local-exec" {
+        command = "sleep 120; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u ubuntu -i '${aws_instance.wowcloud-simple.public_ip},' -e 'env=docker' ../ansible/main.yml"
+        working_dir = "../ansible"
+    }
+
 volume_tags = {
     Name = "wowcloud-simple"
   }
