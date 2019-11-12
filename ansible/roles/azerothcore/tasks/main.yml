@@ -38,4 +38,8 @@
      chdir: /home/{{ wowcloud_user }}/wowcloud
   tags: update-realmlist
 
+- name: WARNING
+  debug: 
+    msg: "THIS IS A PROOF OF CONCEPT. DO NOT RUN THIS IN PRODUCTION. SSH IS ACCESSIBLE FROM ALL ADDRESSES!"
+
 ...
