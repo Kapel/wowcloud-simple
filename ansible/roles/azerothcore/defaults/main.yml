@@ -1,7 +1,8 @@
 ---
 wowcloud_repo: 'https://github.com/azerothcore/azerothcore-wotlk.git'
 wowcloud_version: master
-wowcloud_assets: 'https://github.com/wowgaming/client-data/releases/download/v7/data.zip'
+wowcloud_assets_version: v7
+wowcloud_assets: 'https://github.com/wowgaming/client-data/releases/download/{{ wowcloud_assets_version }}/data.zip'
 wowcloud_user: wowcloud-simple
 
 wowcloud_realmlist_name: "WoWCloud"
