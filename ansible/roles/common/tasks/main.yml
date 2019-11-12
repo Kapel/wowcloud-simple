@@ -1,13 +1,6 @@
 ---
 - include: user.yml
 
-#- name: Add user to sshd
-#  lineinfile:
-#    path: /etc/ssh/sshd_config
-#    regexp: '.+?{{ jenkins_user }}'
-#    line: 'AllowGroups "{{ jenkins_user }}"'
-#    validate: '/usr/sbin/sshd -T -f %s'
-
 - name: Change the login with pubkey parameter to "yes"
   lineinfile: 
     dest: /etc/ssh/sshd_config 
