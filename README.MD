@@ -10,9 +10,9 @@ iiii) about 30 minutes of time
 ##1. Running
 When you've prepared everything than run from the terraform dir: 
 ```
-i) terraform init
-ii) terraform plan
-iii) terraform apply (--parallelism=number_of_cores_on_your_computer)
+1) terraform init
+2) terraform plan
+3) terraform apply (--parallelism=number_of_cores_on_your_computer)
 ```
 
 Modify the realmlist on your computer with the elastic IP and you're good to go.
@@ -37,7 +37,7 @@ iii) docker based
 ##4. Explanation
 This is a simplified version of my main project. One of the pieces. I know that a best practice would be keeping the state of the terraform infrastructure inside S3 + DynamoDB. The purpose of this is to run it straight out of the box.
 
-##5. Tools of trade
+##5. Tools of trade:
 - Terraform - declare the infrastructure as a code; create networks, firewalls; DNS records and more
 - Ansible - provision the machines
 - Docker - create containers to run the versions of code, deploy it quickly
