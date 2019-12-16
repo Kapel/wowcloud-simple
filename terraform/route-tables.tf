@@ -8,7 +8,7 @@ resource "aws_route_table" "PUBLIC" {
 
 
   tags = {
-    Name = "WOWCLOUD-public-route-table"
+    Name = "WoWCloud-Public-Route-Table"
   }
 }
 

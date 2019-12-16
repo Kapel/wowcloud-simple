@@ -5,6 +5,6 @@ resource "aws_subnet" "WOWCLOUD-EC2" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name = "WOWCLOUD-EC2"
+    Name = "EC2-WoWCloud-simple"
   }
 }
