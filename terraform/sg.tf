@@ -54,7 +54,7 @@ resource "aws_security_group" "WOWCLOUD-SIMPLE-SG" {
   }
 
   tags =  {
-    Name = "SG-terraform-wowcloud-SIMPLE"
+    Name = "SG-Terraform-WowCloud-Simple"
   }
 
 }

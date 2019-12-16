@@ -15,7 +15,7 @@ resource "aws_instance" "wowcloud-simple" {
 
 
   tags = {
-    Name = "WOWCLOUD-simple"
+    Name = "WoWCloud-Simple"
   }
 
 
@@ -31,6 +31,6 @@ resource "aws_instance" "wowcloud-simple" {
     }
 
 volume_tags = {
-    Name = "wowcloud-simple"
+    Name = "WoWCloud-Simple"
   }
 }
