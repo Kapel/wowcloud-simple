@@ -21,10 +21,10 @@ Modify the realmlist on your computer with the elastic IP and you're good to go.
 
 ## 2. General
 =======
-THIS IS A PROOF OF CONCEPT. DO NOT RUN THIS IN PRODUCTION. SSH IS ACCESSIBLE FROM ALL ADDRESSES!
+### THIS IS A PROOF OF CONCEPT. DO NOT RUN THIS IN PRODUCTION. SSH IS ACCESSIBLE FROM ALL ADDRESSES!
 Please be aware that additional data (assets) is downloaded from external servers.
 
-##### 1. General
+#### 1. General
 This is a PoC of WoW Infrastructure made by fans. I just show my skills (or their lack) in automation, cloud, containerization etc. This is my small contribution to the community I've grew up with and people who helped me to go on my IT path in the first place. The intrest of this project is clearly fun & educational.
 
 ## 3. Concepts
