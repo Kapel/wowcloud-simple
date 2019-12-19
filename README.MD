@@ -2,10 +2,10 @@
 
 ##0. Install
 To make use of these scripts you'll need:
-i) keypair for connecting (read about [private/public key](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2)) - change in terraform/keys
-ii) [AWS account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/) + [AWS CLI configured](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
-iii) [terraform  0.12](https://learn.hashicorp.com/terraform/getting-started/install.html) and [ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) (any fairly new version) installed
-iiii) about 30 minutes of time
+i. keypair for connecting (read about [private/public key](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2)) - change in terraform/keys
+ii. [AWS account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/) + [AWS CLI configured](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
+iii. [terraform  0.12](https://learn.hashicorp.com/terraform/getting-started/install.html) and [ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) (any fairly new version) installed
+iiii. about 30 minutes of time
 
 ##1. Running
 When you've prepared everything than run from the terraform dir: 
