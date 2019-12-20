@@ -1,7 +1,0 @@
----
-system_users: [somsiadcore]
-jenkins_user: somsiadcore
-users:
-  - username: somsiadcore
-    key: '{{ somsiadcore_privkey }}'
-...

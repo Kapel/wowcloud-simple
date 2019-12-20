@@ -1,0 +1,7 @@
+---
+- hosts: all
+  become: true
+  gather_facts: true
+  
+- import_playbook: "playbooks/{{ env }}.yml"
+...

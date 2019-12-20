@@ -1,0 +1,6 @@
+---                                                                     
+- become: true
+
+  roles:
+  - { role: common, tags: [ 'provisioning' ] }
+  - { role: azerothcore-local, tags: [ 'azerothcore-local' ] }

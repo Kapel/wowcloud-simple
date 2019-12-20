@@ -1,3 +1,2 @@
 ---
-system_users: [azerothcore]
-jenkins_user: azerothcore
+system_users: [wowcloud-simple]

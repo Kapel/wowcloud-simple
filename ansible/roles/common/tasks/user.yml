@@ -1,17 +1,8 @@
 ---
 - name: Add required users
   user: 
-    name: "{{ item.username }}"
+    name: "{{ item }}"
     append: yes
+    shell: /bin/bash
   with_items:
-  - "{{ users }}"
-
-- name: Create private keys
-  copy:
-    dest: "/home/{{ item.username }}/.ssh/id_rsa"
-    owner: "{{ item.username }}"
-    group: "{{ item.username }}"
-    mode: '400'
-  with_items:
-  - "{{ users }}"
-#todo - change system_users variable dict to containing two fields: username and keyfile
+  - "{{ system_users }}"

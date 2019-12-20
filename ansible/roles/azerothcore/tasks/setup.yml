@@ -1,35 +1,62 @@
 ---
-#clone repo
-- name: Clone azerothcore repo
-  git:
-    repo: "{{ azerothcore_repo }}" 
-    dest: /home/{{ jenkins_user }}/azerothcore
-    version: "{{ azerothcore_version }}"
-
 - name: Check if the repo exists
   stat:
-    path: "/home/{{ jenkins_user }}/azerothcore"
-  register: stat_somsiadrepo
+    path: "/home/{{ wowcloud_user }}/wowcloud"
+  register: stat_wowcloudrepo
+
+- name: Clone wowcloud repo
+  git:
+    repo: "{{ wowcloud_repo }}" 
+    dest: /home/{{ wowcloud_user }}/wowcloud
+    version: "{{ wowcloud_version }}"
+  when: stat_wowcloudrepo.stat.exists == False
+
+- name: Check if the repo exists(2)
+  stat:
+    path: "/home/{{ wowcloud_user }}/wowcloud"
+  register: stat_wowcloudrepo
+
+- name: Check if assets exist
+  stat:
+    path: "/home/{{ wowcloud_user }}/wowcloud/assets.zip"
+  register: stat_wowassets
+  tags: assets
 
 - name: Download assets
   get_url:
-    path: '{{ azerothcore_assets }}'
-    dest: "/home/{{ jenkins_user }}/azerothcore/assets.zip"
-  when: stat_somsiadrepo.stat.exists == true
+    url: '{{ wowcloud_assets }}'
+    dest: "/home/{{ wowcloud_user }}/wowcloud/assets.zip"
+  when: 
+    - stat_wowcloudrepo.stat.exists
+    - stat_wowassets.stat.exists == False
+  tags: assets
 
 - name: Unzip assets
   unarchive:
-    src: "/home/{{ jenkins_user }}/azerothcore/assets.zip"
-    dest: "/home/{{ jenkins_user }}/azerothcore/azerothcore/docker/worldserver/data/"
+    src: "/home/{{ wowcloud_user }}/wowcloud/assets.zip"
+    dest: "/home/{{ wowcloud_user }}/wowcloud/docker/worldserver/data/"
     remote_src: yes
     keep_newer: yes
-  when: stat_somsiadrepo.stat.exists == true
+  when: stat_wowcloudrepo.stat.exists == true
+  tags: assets
+
+- name: Check if config exist
+  stat:
+    path: "/home/{{ wowcloud_user }}/wowcloud/docker/authserver/etc/authserver.conf"
+  register: stat_authconf
+  tags: generate-config
+  
 
 - name: Generate server config
-  command: ./home/{{ jenkins_user }}/azerothcore/azerothcore/bin/acore-docker-generate-etc
+  command: "sh /home/{{ wowcloud_user }}/wowcloud/bin/acore-docker-generate-etc"
+  args:
+    chdir: /home/{{ wowcloud_user }}/wowcloud
+  when: stat_authconf.stat.exists == false #OR "generate-config" in ansible_run_tags
+  tags: generate-config
 
-- name: Compile azerothcore
-  command: ./home/{{ jenkins_user }}/azerothcore/azerothcore/bin/acore-docker-build
-
+- name: Compile wowcloud
+  command: "sh /home/{{ wowcloud_user }}/wowcloud/bin/acore-docker-build"
+  args:
+    chdir: /home/{{ wowcloud_user }}/wowcloud
 
 ...

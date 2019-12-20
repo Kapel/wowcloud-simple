@@ -3,11 +3,36 @@
 - name: Setup azerothcore
   include_tasks: setup.yml
 
+- name: Start wowcloud
+  shell: "docker-compose up -d"
+  args:
+    chdir: /home/{{ wowcloud_user }}/wowcloud
+  tags: start-wowcloud
 
+- name: Restart wowcloud
+  shell: "docker-compose restart"
+  args:
+    chdir: /home/{{ wowcloud_user }}/wowcloud
+  tags: restart-wowcloud
+  when:
+    - '"restart-wowcloud" in ansible_run_tags'
 
+- name: Stop wowcloud
+  shell: "docker-compose stop"
+  args:
+    chdir: /home/{{ wowcloud_user }}/wowcloud
+  tags: stop-wowcloud
+  when:
+    - '"stop-wowcloud" in ansible_run_tags'
 
-#azerothcore up (handler)
-#create users from vault
-#update realmlist (handler?)
-#restart azerothcore
+- name: Update realmlist
+  shell: docker-compose exec ac-database mysql -u root -h localhost -p{{ wowcloud_db_password }} acore_auth -e "update realmlist set name = '{{ wowcloud_realmlist_name }}', address='{{ wowcloud_realmlist_address }}' where id = {{ wowcloud_realmlist_id }};"
+  args:
+     chdir: /home/{{ wowcloud_user }}/wowcloud
+  tags: update-realmlist
+
+- name: WARNING
+  debug: 
+    msg: "THIS IS A PROOF OF CONCEPT. DO NOT RUN THIS IN PRODUCTION. SSH IS ACCESSIBLE FROM ALL ADDRESSES!"
+
 ...

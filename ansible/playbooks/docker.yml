@@ -1,0 +1,8 @@
+---                                                                     
+- hosts: all
+  become: true
+
+  roles:
+  - { role: common, tags: [ 'provisioning' ] }
+  - { role: docker, tags: [ 'provisioning' ] }
+  - { role: azerothcore, tags: [ 'azerothcore' ] }

@@ -1,5 +1,14 @@
 ---
-somsiadcore_repo: 'https://github.com/azerothcore/azerothcore-wotlk.git'
-somsiadcore_version: master
-somsiadcore_assets: 'https://github.com/wowgaming/client-data/releases/download/v7/data.zip'
+wowcloud_repo: 'https://github.com/azerothcore/azerothcore-wotlk.git'
+wowcloud_version: master
+wowcloud_assets_version: v7
+wowcloud_assets: 'https://github.com/wowgaming/client-data/releases/download/{{ wowcloud_assets_version }}/data.zip'
+wowcloud_user: wowcloud-simple
+
+wowcloud_realmlist_name: "WoWCloud"
+wowcloud_realmlist_id: 1
+wowcloud_realmlist_address: "127.0.1.1"
+
+#ok, this one should go into a vault as any other password
+wowcloud_db_password: "password"
 ...
